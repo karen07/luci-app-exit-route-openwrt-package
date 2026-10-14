@@ -1,0 +1,53 @@
+{
+    "luci-app-exit-route": {
+        "description": "Manage mesh exit policies via UCI and read Babel reachability",
+        "read": {
+            "uci": [
+                "exit_route"
+            ],
+            "file": {
+                "/etc/scripts/exit-route.sh status": [
+                    "exec"
+                ],
+                "/etc/init.d/exit-route status": [
+                    "exec"
+                ],
+                "/etc/init.d/exit-route enabled": [
+                    "exec"
+                ]
+            },
+            "ubus": {
+                "file": [
+                    "exec"
+                ]
+            }
+        },
+        "write": {
+            "uci": [
+                "exit_route"
+            ],
+            "file": {
+                "/etc/init.d/exit-route start": [
+                    "exec"
+                ],
+                "/etc/init.d/exit-route restart": [
+                    "exec"
+                ],
+                "/etc/init.d/exit-route stop": [
+                    "exec"
+                ],
+                "/etc/init.d/exit-route enable": [
+                    "exec"
+                ],
+                "/etc/init.d/exit-route disable": [
+                    "exec"
+                ]
+            },
+            "ubus": {
+                "file": [
+                    "exec"
+                ]
+            }
+        }
+    }
+}
