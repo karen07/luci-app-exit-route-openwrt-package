@@ -1,0 +1,225 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: luci-app-exit-route\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+msgid "Add to AUTO"
+msgstr ""
+
+msgid "Applied"
+msgstr ""
+
+msgid "Applying"
+msgstr ""
+
+msgid "Autostart"
+msgstr ""
+
+msgid "Available"
+msgstr ""
+
+msgid "BLOCKED"
+msgstr ""
+
+msgid "Cancel"
+msgstr ""
+
+msgid "Change order"
+msgstr ""
+
+msgid "Choose a known device or enter an IPv4 address manually."
+msgstr ""
+
+msgid "Command failed"
+msgstr ""
+
+msgid "Configure IPv4 exit policies. Changes are staged automatically; routes change only after Save & Apply."
+msgstr ""
+
+msgid "Configured mode"
+msgstr ""
+
+msgid "Current route (UCI)"
+msgstr ""
+
+msgid "Device"
+msgstr ""
+
+msgid "Device routing"
+msgstr ""
+
+msgid "Disable"
+msgstr ""
+
+msgid "Disabled"
+msgstr ""
+
+msgid "Done"
+msgstr ""
+
+msgid "Enable"
+msgstr ""
+
+msgid "Enabled"
+msgstr ""
+
+msgid "Enter a valid unicast IPv4 address."
+msgstr ""
+
+msgid "Error"
+msgstr ""
+
+msgid "Exclude from AUTO"
+msgstr ""
+
+msgid "Exit"
+msgstr ""
+
+msgid "Exit Route"
+msgstr ""
+
+msgid "Exit Route - Configuration"
+msgstr ""
+
+msgid "Exit Route - Status"
+msgstr ""
+
+msgid "Exit server"
+msgstr ""
+
+msgid "Exit status"
+msgstr ""
+
+msgid "Failed"
+msgstr ""
+
+msgid "Global route"
+msgstr ""
+
+msgid "IPv4 address"
+msgstr ""
+
+msgid "Last application"
+msgstr ""
+
+msgid "Move down"
+msgstr ""
+
+msgid "Move up"
+msgstr ""
+
+msgid "Per-device policies override the global policy. Add an IPv4 address to create an override."
+msgstr ""
+
+msgid "Reachability is determined by Babel routes, not by an internet probe."
+msgstr ""
+
+msgid "Remove"
+msgstr ""
+
+msgid "Restart"
+msgstr ""
+
+msgid "Routing mode"
+msgstr ""
+
+msgid "Routing policy"
+msgstr ""
+
+msgid "Running"
+msgstr ""
+
+msgid "Select a policy for clients without a device override."
+msgstr ""
+
+msgid "Service control"
+msgstr ""
+
+msgid "Service status"
+msgstr ""
+
+msgid "Shared AUTO order"
+msgstr ""
+
+msgid "Start"
+msgstr ""
+
+msgid "Status"
+msgstr ""
+
+msgid "Stop"
+msgstr ""
+
+msgid "Stopped"
+msgstr ""
+
+msgid "The first reachable exit is chosen automatically."
+msgstr ""
+
+msgid "This AUTO order is shared by the global route and all AUTO devices."
+msgstr ""
+
+msgid "This IPv4 address already has a policy."
+msgstr ""
+
+msgid "Unavailable"
+msgstr ""
+
+msgid "Unknown"
+msgstr ""
+
+msgid "Use global route"
+msgstr ""
+
+
+msgid "AUTO order"
+msgstr ""
+
+msgid "Use shared AUTO order"
+msgstr ""
+
+msgid "Custom AUTO order"
+msgstr ""
+
+msgid "This AUTO order applies only to this device."
+msgstr ""
+
+msgid "This AUTO order is shared by the global route and devices without a custom order."
+msgstr ""
+
+msgid "Running."
+msgstr ""
+
+msgid "Stopped."
+msgstr ""
+
+msgid "Autostart is enabled."
+msgstr ""
+
+msgid "Autostart is disabled."
+msgstr ""
+
+msgid "Last known route"
+msgstr ""
+
+msgid "Saving changes to pending UCI..."
+msgstr ""
+
+msgid "AUTO (custom)"
+msgstr ""
+
+msgid "AUTO (shared)"
+msgstr ""
+
+msgid "Drag to reorder"
+msgstr ""
+
+msgid "Drag the handle to reorder, or use the arrow buttons."
+msgstr ""
+
+msgid "Global"
+msgstr ""
+
+msgid "Initially copied from global AUTO. This order belongs to this device."
+msgstr ""

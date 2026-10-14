@@ -1,0 +1,228 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: luci-app-exit-route\n"
+"Language: ru\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<12 || n%100>14) ? 1 : 2);\n"
+
+msgid "Add to AUTO"
+msgstr "Добавить в AUTO"
+
+msgid "Applied"
+msgstr "Применено"
+
+msgid "Applying"
+msgstr "Применяется"
+
+msgid "Autostart"
+msgstr "Автозапуск"
+
+msgid "Available"
+msgstr "Доступен"
+
+msgid "BLOCKED"
+msgstr "ЗАБЛОКИРОВАНО"
+
+msgid "Cancel"
+msgstr "Отмена"
+
+msgid "Change order"
+msgstr "Изменить порядок"
+
+msgid "Choose a known device or enter an IPv4 address manually."
+msgstr "Выберите известное устройство или введите IPv4 вручную."
+
+msgid "Command failed"
+msgstr "Ошибка выполнения команды"
+
+msgid "Configure IPv4 exit policies. Changes are staged automatically; routes change only after Save & Apply."
+msgstr "Настройка IPv4-маршрутизации. Изменения сохраняются в ожидающую конфигурацию автоматически, применяются только через Save & Apply."
+
+msgid "Configured mode"
+msgstr "Настроенный режим"
+
+msgid "Current route (UCI)"
+msgstr "Текущий маршрут (UCI)"
+
+msgid "Device"
+msgstr "Устройство"
+
+msgid "Device routing"
+msgstr "Маршрутизация устройств"
+
+msgid "Disable"
+msgstr "Отключить"
+
+msgid "Disabled"
+msgstr "Выключен"
+
+msgid "Done"
+msgstr "Готово"
+
+msgid "Enable"
+msgstr "Включить"
+
+msgid "Enabled"
+msgstr "Включён"
+
+msgid "Enter a valid unicast IPv4 address."
+msgstr "Введите корректный IPv4-адрес устройства."
+
+msgid "Error"
+msgstr "Ошибка"
+
+msgid "Exclude from AUTO"
+msgstr "Исключить из AUTO"
+
+msgid "Exit"
+msgstr "EXIT"
+
+msgid "Exit Route"
+msgstr "Exit Route"
+
+msgid "Exit Route - Configuration"
+msgstr "Exit Route — Настройки"
+
+msgid "Exit Route - Status"
+msgstr "Exit Route — Состояние"
+
+msgid "Exit server"
+msgstr "Сервер выхода"
+
+msgid "Exit status"
+msgstr "Состояние выходов"
+
+msgid "Failed"
+msgstr "Ошибка"
+
+msgid "Global route"
+msgstr "Глобальная маршрутизация"
+
+msgid "IPv4 address"
+msgstr "IPv4-адрес"
+
+msgid "Last application"
+msgstr "Последнее применение"
+
+msgid "Move down"
+msgstr "Переместить вниз"
+
+msgid "Move up"
+msgstr "Переместить вверх"
+
+msgid "Per-device policies override the global policy. Add an IPv4 address to create an override."
+msgstr "Индивидуальные правила имеют приоритет над глобальными. Добавьте IPv4-адрес для создания правила."
+
+msgid "Reachability is determined by Babel routes, not by an internet probe."
+msgstr "Доступность определяется маршрутами Babel, а не проверкой доступа к интернету."
+
+msgid "Remove"
+msgstr "Удалить"
+
+msgid "Restart"
+msgstr "Перезапустить"
+
+msgid "Routing mode"
+msgstr "Режим маршрутизации"
+
+msgid "Routing policy"
+msgstr "Политика маршрутизации"
+
+msgid "Running"
+msgstr "Работает"
+
+msgid "Select a policy for clients without a device override."
+msgstr "Политика для устройств без индивидуальных правил."
+
+msgid "Service control"
+msgstr "Управление службой"
+
+msgid "Service status"
+msgstr "Состояние службы"
+
+msgid "Shared AUTO order"
+msgstr "Общий порядок AUTO"
+
+msgid "Start"
+msgstr "Запустить"
+
+msgid "Status"
+msgstr "Состояние"
+
+msgid "Stop"
+msgstr "Остановить"
+
+msgid "Stopped"
+msgstr "Остановлена"
+
+msgid "The first reachable exit is chosen automatically."
+msgstr "Автоматически выбирается первый доступный выход."
+
+msgid "This AUTO order is shared by the global route and all AUTO devices."
+msgstr "Этот порядок общий для глобального AUTO и всех устройств с AUTO."
+
+msgid "This IPv4 address already has a policy."
+msgstr "Для этого IPv4-адреса уже существует правило."
+
+msgid "Unavailable"
+msgstr "Недоступен"
+
+msgid "Unknown"
+msgstr "Неизвестно"
+
+msgid "Use global route"
+msgstr "Использовать глобальный режим"
+
+
+msgid "AUTO order"
+msgstr "Порядок AUTO"
+
+msgid "Use shared AUTO order"
+msgstr "Использовать общий порядок AUTO"
+
+msgid "Custom AUTO order"
+msgstr "Свой порядок AUTO"
+
+msgid "This AUTO order applies only to this device."
+msgstr "Этот порядок AUTO действует только для этого устройства."
+
+msgid "This AUTO order is shared by the global route and devices without a custom order."
+msgstr "Этот порядок AUTO общий для глобальной маршрутизации и устройств без индивидуального порядка."
+
+msgid "Running."
+msgstr "Запущена."
+
+msgid "Stopped."
+msgstr "Остановлена."
+
+msgid "Autostart is enabled."
+msgstr "Автозапуск включён."
+
+msgid "Autostart is disabled."
+msgstr "Автозапуск выключен."
+
+msgid "Last known route"
+msgstr "Последний известный маршрут"
+
+msgid "Saving changes to pending UCI..."
+msgstr "Сохранение изменений в ожидающую конфигурацию UCI..."
+
+msgid "AUTO (custom)"
+msgstr "AUTO (свой порядок)"
+
+msgid "AUTO (shared)"
+msgstr "AUTO (общий порядок)"
+
+msgid "Drag to reorder"
+msgstr "Перетащите для изменения порядка"
+
+msgid "Drag the handle to reorder, or use the arrow buttons."
+msgstr "Перетащите за ручку или используйте кнопки со стрелками."
+
+msgid "Global"
+msgstr "Глобальный"
+
+msgid "Initially copied from global AUTO. This order belongs to this device."
+msgstr "Изначально скопирован из глобального AUTO. Этот порядок принадлежит только этому устройству."
