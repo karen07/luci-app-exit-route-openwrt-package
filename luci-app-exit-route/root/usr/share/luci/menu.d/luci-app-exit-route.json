@@ -1,0 +1,15 @@
+{
+    "admin/network/exit-route": {
+        "title": "Exit Route",
+        "order": 95,
+        "action": {
+            "type": "view",
+            "path": "network/exit-route"
+        },
+        "depends": {
+            "acl": [
+                "luci-app-exit-route"
+            ]
+        }
+    }
+}

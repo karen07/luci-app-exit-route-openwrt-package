@@ -1,0 +1,129 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: luci-app-exit-route 0.2.0\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<12 || n%100>14) ? 1 : 2);\n"
+
+msgid "Action"
+msgstr ""
+
+msgid "Active"
+msgstr ""
+
+msgid "Active route"
+msgstr ""
+
+msgid "Add device"
+msgstr ""
+
+msgid "Auto"
+msgstr ""
+
+msgid "Automatically selected according to exit priority."
+msgstr ""
+
+msgid "Command failed"
+msgstr ""
+
+msgid "Deployment"
+msgstr ""
+
+msgid "Device"
+msgstr ""
+
+msgid "Device / IP"
+msgstr ""
+
+msgid "Device routing"
+msgstr ""
+
+msgid "Direct routing through the main routing table."
+msgstr ""
+
+msgid "Enter a valid unicast IPv4 address."
+msgstr ""
+
+msgid "Exit Route"
+msgstr ""
+
+msgid "Exits use Babel routes; WAN uses the main default route, not a ping."
+msgstr ""
+
+msgid "Exit status"
+msgstr ""
+
+msgid "Global route"
+msgstr ""
+
+msgid "IPv4 address"
+msgstr ""
+
+msgid "Interface"
+msgstr ""
+
+msgid "Manual override enabled."
+msgstr ""
+
+msgid "No devices found. Add an IPv4 address below."
+msgstr ""
+
+msgid "No route"
+msgstr ""
+
+msgid "Override routing for IPv4 devices. Changes apply immediately."
+msgstr ""
+
+msgid "Reachable"
+msgstr ""
+
+msgid "Restore"
+msgstr ""
+
+msgid "Restore deployment rule"
+msgstr ""
+
+msgid "Route"
+msgstr ""
+
+msgid "Route available"
+msgstr ""
+
+msgid "Routing table"
+msgstr ""
+
+msgid "Select the default exit for traffic without device-specific rules."
+msgstr ""
+
+msgid "Selected mode"
+msgstr ""
+
+msgid "Service running"
+msgstr ""
+
+msgid "Service stopped"
+msgstr ""
+
+msgid "Split via %s"
+msgstr ""
+
+msgid "The selected exit is unreachable; the global exit route is disabled."
+msgstr ""
+
+msgid "Tunnel"
+msgstr ""
+
+msgid "Unknown"
+msgstr ""
+
+msgid "Unreachable"
+msgstr ""
+
+msgid "Use global route"
+msgstr ""
+
+msgid "Via interface"
+msgstr ""
+

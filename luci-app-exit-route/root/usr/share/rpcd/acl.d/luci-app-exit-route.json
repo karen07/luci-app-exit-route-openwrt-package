@@ -1,0 +1,38 @@
+{
+    "luci-app-exit-route": {
+        "description": "Manage mesh exit and device routes via exit-route.sh",
+        "read": {
+            "file": {
+                "/etc/scripts/exit-route.sh status": [
+                    "exec"
+                ],
+                "/etc/scripts/exit-route.sh device-list": [
+                    "exec"
+                ]
+            },
+            "ubus": {
+                "file": [
+                    "exec"
+                ]
+            }
+        },
+        "write": {
+            "file": {
+                "/etc/scripts/exit-route.sh set *": [
+                    "exec"
+                ],
+                "/etc/scripts/exit-route.sh device-set *": [
+                    "exec"
+                ],
+                "/etc/scripts/exit-route.sh device-del *": [
+                    "exec"
+                ]
+            },
+            "ubus": {
+                "file": [
+                    "exec"
+                ]
+            }
+        }
+    }
+}

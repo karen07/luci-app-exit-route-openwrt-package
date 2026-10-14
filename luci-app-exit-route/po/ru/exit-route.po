@@ -1,0 +1,129 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: luci-app-exit-route 0.2.0\n"
+"Language: ru\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<12 || n%100>14) ? 1 : 2);\n"
+
+msgid "Action"
+msgstr "Действие"
+
+msgid "Active"
+msgstr "Активен"
+
+msgid "Active route"
+msgstr "Активный маршрут"
+
+msgid "Add device"
+msgstr "Добавить устройство"
+
+msgid "Auto"
+msgstr "Авто"
+
+msgid "Automatically selected according to exit priority."
+msgstr "Автоматический выбор по приоритету выходов."
+
+msgid "Command failed"
+msgstr "Ошибка выполнения команды"
+
+msgid "Deployment"
+msgstr "Из деплоя"
+
+msgid "Device"
+msgstr "Устройство"
+
+msgid "Device / IP"
+msgstr "Устройство / IP"
+
+msgid "Device routing"
+msgstr "Маршрутизация устройств"
+
+msgid "Direct routing through the main routing table."
+msgstr "Прямая маршрутизация через основную таблицу."
+
+msgid "Enter a valid unicast IPv4 address."
+msgstr "Введите корректный одноадресный IPv4-адрес."
+
+msgid "Exit Route"
+msgstr "Маршрутизация через выходы"
+
+msgid "Exits use Babel routes; WAN uses the main default route, not a ping."
+msgstr "Доступность выходов определяется маршрутами Babel. Для WAN проверяется маршрут по умолчанию в таблице main, а не доступность интернета."
+
+msgid "Exit status"
+msgstr "Состояние выходов"
+
+msgid "Global route"
+msgstr "Общий маршрут"
+
+msgid "IPv4 address"
+msgstr "IPv4-адрес"
+
+msgid "Interface"
+msgstr "Интерфейс"
+
+msgid "Manual override enabled."
+msgstr "Ручной выбор активен."
+
+msgid "No devices found. Add an IPv4 address below."
+msgstr "Устройства не найдены. Добавьте IPv4-адрес ниже."
+
+msgid "No route"
+msgstr "Маршрута нет"
+
+msgid "Override routing for IPv4 devices. Changes apply immediately."
+msgstr "Настройка отдельного маршрута для IPv4-устройств. Изменения применяются сразу."
+
+msgid "Reachable"
+msgstr "Доступен"
+
+msgid "Restore"
+msgstr "Восстановить"
+
+msgid "Restore deployment rule"
+msgstr "Вернуть правило из деплоя"
+
+msgid "Route"
+msgstr "Маршрут"
+
+msgid "Route available"
+msgstr "Маршрут доступен"
+
+msgid "Routing table"
+msgstr "Таблица маршрутизации"
+
+msgid "Select the default exit for traffic without device-specific rules."
+msgstr "Выберите выход по умолчанию для трафика без индивидуальных правил."
+
+msgid "Selected mode"
+msgstr "Выбранный режим"
+
+msgid "Service running"
+msgstr "Служба запущена"
+
+msgid "Service stopped"
+msgstr "Служба остановлена"
+
+msgid "Split via %s"
+msgstr "Раздельная маршрутизация через %s"
+
+msgid "The selected exit is unreachable; the global exit route is disabled."
+msgstr "Выбранный выход недоступен; общий exit-маршрут отключён."
+
+msgid "Tunnel"
+msgstr "Туннель"
+
+msgid "Unknown"
+msgstr "Неизвестно"
+
+msgid "Unreachable"
+msgstr "Недоступен"
+
+msgid "Use global route"
+msgstr "Использовать общий маршрут"
+
+msgid "Via interface"
+msgstr "Через интерфейс"
+
