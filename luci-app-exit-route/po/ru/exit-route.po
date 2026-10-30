@@ -97,6 +97,9 @@ msgstr "Таблица маршрутизации"
 msgid "Select the default exit for traffic without device-specific rules."
 msgstr "Выберите выход по умолчанию для трафика без индивидуальных правил."
 
+msgid "Select exit..."
+msgstr "Выбрать выход..."
+
 msgid "Selected mode"
 msgstr "Выбранный режим"
 
@@ -126,4 +129,40 @@ msgstr "Использовать общий маршрут"
 
 msgid "Via interface"
 msgstr "Через интерфейс"
+
+msgid "AUTO priorities"
+msgstr "Приоритеты AUTO"
+
+msgid "Drag exits within or between lists to set AUTO priorities."
+msgstr "Перетаскивайте выходы внутри списков и между ними для настройки AUTO."
+
+msgid "Keep at least one exit in AUTO."
+msgstr "В AUTO должен оставаться хотя бы один выход."
+
+msgid "Drag to reorder. Use arrow keys or Enter as an alternative."
+msgstr "Перетащите для изменения порядка. Также доступны стрелки и Enter."
+
+msgid "Move exit %s"
+msgstr "Переместить выход %s"
+
+msgid "Restore deployment priorities"
+msgstr "Восстановить приоритеты генератора"
+
+msgid "Cancel"
+msgstr "Отменить"
+
+msgid "Save and apply"
+msgstr "Сохранить и применить"
+
+msgid "In AUTO (top priority first)"
+msgstr "Участвуют в AUTO (по убыванию приоритета)"
+
+msgid "Not in AUTO (manual selection remains available)"
+msgstr "Не участвуют в AUTO (доступны для ручного выбора)"
+
+msgid "Priorities are saved."
+msgstr "Приоритеты сохранены."
+
+msgid "Unsaved AUTO changes."
+msgstr "Несохранённые изменения AUTO."
 

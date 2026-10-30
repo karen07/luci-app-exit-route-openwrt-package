@@ -21,6 +21,12 @@
                 "/etc/scripts/exit-route.sh set *": [
                     "exec"
                 ],
+                "/etc/scripts/exit-route.sh auto-set *": [
+                    "exec"
+                ],
+                "/etc/scripts/exit-route.sh auto-reset": [
+                    "exec"
+                ],
                 "/etc/scripts/exit-route.sh device-set *": [
                     "exec"
                 ],

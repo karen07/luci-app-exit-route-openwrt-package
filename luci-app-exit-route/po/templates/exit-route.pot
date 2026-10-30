@@ -97,6 +97,9 @@ msgstr ""
 msgid "Select the default exit for traffic without device-specific rules."
 msgstr ""
 
+msgid "Select exit..."
+msgstr ""
+
 msgid "Selected mode"
 msgstr ""
 
@@ -125,5 +128,41 @@ msgid "Use global route"
 msgstr ""
 
 msgid "Via interface"
+msgstr ""
+
+msgid "AUTO priorities"
+msgstr ""
+
+msgid "Drag exits within or between lists to set AUTO priorities."
+msgstr ""
+
+msgid "Keep at least one exit in AUTO."
+msgstr ""
+
+msgid "Drag to reorder. Use arrow keys or Enter as an alternative."
+msgstr ""
+
+msgid "Move exit %s"
+msgstr ""
+
+msgid "Restore deployment priorities"
+msgstr ""
+
+msgid "Cancel"
+msgstr ""
+
+msgid "Save and apply"
+msgstr ""
+
+msgid "In AUTO (top priority first)"
+msgstr ""
+
+msgid "Not in AUTO (manual selection remains available)"
+msgstr ""
+
+msgid "Priorities are saved."
+msgstr ""
+
+msgid "Unsaved AUTO changes."
 msgstr ""
 

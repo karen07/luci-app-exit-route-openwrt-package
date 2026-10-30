@@ -170,8 +170,13 @@ return view.extend({
         this.state = data.state;
         this.devices = data.devices;
         this.busy = false;
+        this.refreshError = false;
         this.globalNode = E('div');
         this.statusNode = E('div');
+        this.autoNode = E('div');
+        this.autoDraft = null;
+        this.autoEditing = false;
+        this.autoDrag = null;
         this.devicesNode = E('div');
         this.serviceNode = E('span');
         this.ipInput = E('input', {
@@ -199,6 +204,13 @@ return view.extend({
                     _('Select the default exit for traffic without device-specific rules.'),
                 ]),
                 this.globalNode,
+            ]),
+            E('div', { class: 'cbi-section' }, [
+                E('h3', {}, [_('AUTO priorities')]),
+                E('p', { class: 'cbi-section-descr' }, [
+                    _('Drag exits within or between lists to set AUTO priorities.'),
+                ]),
+                this.autoNode,
             ]),
             E('div', { class: 'cbi-section' }, [
                 E('h3', {}, [_('Exit status')]),
@@ -256,31 +268,55 @@ return view.extend({
         dom.content(this.serviceNode, [
             state.SERVICE === 'RUNNING' ? _('Service running') : _('Service stopped'),
         ]);
-        var globalButtons = ['AUTO'].concat(
-            state.exits.map(function (e) {
-                return e.name;
-            }),
-            ['WAN'],
+        var manualOptions = [E('option', { value: '' }, [_('Select exit...')])];
+        state.exits.forEach(function (exit) {
+            manualOptions.push(E('option', { value: exit.name }, [exit.name]));
+        });
+        var manualSelect = E(
+            'select',
+            {
+                class: 'cbi-input-select',
+                style: 'max-width: 16em;',
+                disabled: self.busy,
+                change: function (ev) {
+                    if (ev.target.value) return self.setGlobal(ev.target.value);
+                },
+            },
+            manualOptions,
         );
+        manualSelect.value = state.exits.some(function (exit) {
+            return exit.name === mode;
+        })
+            ? mode
+            : '';
         var globalParts = [
-            E(
-                'div',
-                { style: 'display:flex;flex-wrap:wrap;gap:.5em;' },
-                globalButtons.map(function (value) {
-                    return E(
-                        'button',
-                        {
-                            type: 'button',
-                            class: 'btn' + (value === mode ? ' btn-primary' : ''),
-                            disabled: self.busy,
-                            click: function () {
-                                return self.setGlobal(value);
-                            },
+            E('div', { style: 'display:flex;flex-wrap:wrap;gap:.5em;align-items:center;' }, [
+                E(
+                    'button',
+                    {
+                        type: 'button',
+                        class: 'btn' + (mode === 'AUTO' ? ' btn-primary' : ''),
+                        disabled: self.busy,
+                        click: function () {
+                            return self.setGlobal('AUTO');
                         },
-                        [value === 'AUTO' ? _('Auto') : value],
-                    );
-                }),
-            ),
+                    },
+                    [_('Auto')],
+                ),
+                E(
+                    'button',
+                    {
+                        type: 'button',
+                        class: 'btn' + (mode === 'WAN' ? ' btn-primary' : ''),
+                        disabled: self.busy,
+                        click: function () {
+                            return self.setGlobal('WAN');
+                        },
+                    },
+                    ['WAN'],
+                ),
+                manualSelect,
+            ]),
         ];
         globalParts.push(
             E(
@@ -350,6 +386,252 @@ return view.extend({
             E('div', { style: 'display:flex;flex-wrap:wrap;gap:.8em;margin:1em 0;' }, exitCards),
         );
         this.renderDevices();
+        if (!this.autoDrag) this.renderAuto();
+    },
+
+    autoOrders: function () {
+        var names = this.state.exits.map(function (e) {
+            return e.name;
+        });
+        var defaultOrder = (this.state.AUTO_DEFAULT || '').split(/\s+/).filter(Boolean);
+        var saved = (this.state.AUTO_EFFECTIVE || '').split(/\s+/).filter(Boolean);
+        var valid = function (list) {
+            return list.filter(function (name, i) {
+                return names.indexOf(name) !== -1 && list.indexOf(name) === i;
+            });
+        };
+        defaultOrder = valid(defaultOrder);
+        saved = valid(saved);
+        if (!saved.length) saved = defaultOrder.slice();
+        if (!this.autoEditing || !this.autoDraft) this.autoDraft = saved.slice();
+        return { names: names, defaults: defaultOrder, saved: saved };
+    },
+
+    moveAuto: function (name, zone, target, after) {
+        var data = this.autoOrders();
+        if (data.names.indexOf(name) < 0) return;
+        var next = this.autoDraft.filter(function (n) {
+            return n !== name;
+        });
+        if (zone === 'enabled') {
+            var index = target ? next.indexOf(target) : -1;
+            if (index < 0) index = next.length;
+            else if (after) index++;
+            next.splice(index, 0, name);
+        } else if (!next.length) {
+            ui.addNotification(null, E('p', {}, [_('Keep at least one exit in AUTO.')]), 'warning');
+            return;
+        }
+        this.autoDraft = next;
+        this.autoEditing = true;
+        this.renderAuto();
+    },
+
+    renderAuto: function () {
+        var self = this;
+        var data = this.autoOrders();
+        var equal = JSON.stringify(this.autoDraft) === JSON.stringify(data.saved);
+        var reachable = {};
+        this.state.exits.forEach(function (e) {
+            reachable[e.name] = e.reachable;
+        });
+
+        function row(name, index, enabled) {
+            var handle = E(
+                'button',
+                {
+                    type: 'button',
+                    class: 'btn',
+                    style: 'cursor:grab;touch-action:none;padding:.3em .6em;',
+                    title: _('Drag to reorder. Use arrow keys or Enter as an alternative.'),
+                    'aria-label': _('Move exit %s').format(name),
+                    keydown: function (event) {
+                        if (event.key === 'Enter' || event.key === ' ') {
+                            event.preventDefault();
+                            self.moveAuto(name, enabled ? 'disabled' : 'enabled');
+                        } else if (
+                            enabled &&
+                            (event.key === 'ArrowUp' || event.key === 'ArrowDown')
+                        ) {
+                            event.preventDefault();
+                            var idx = self.autoDraft.indexOf(name);
+                            var delta = event.key === 'ArrowUp' ? -1 : 1;
+                            var other = self.autoDraft[idx + delta];
+                            if (!other) return;
+                            self.moveAuto(name, 'enabled', other, delta > 0);
+                        }
+                    },
+                    pointerdown: function (event) {
+                        if (event.button !== 0 && event.pointerType === 'mouse') return;
+                        self.autoDrag = {
+                            name: name,
+                            id: event.pointerId,
+                            x: event.clientX,
+                            y: event.clientY,
+                            started: false,
+                            row: event.currentTarget.parentNode,
+                        };
+                        event.currentTarget.setPointerCapture(event.pointerId);
+                        event.preventDefault();
+                    },
+                    pointermove: function (event) {
+                        var drag = self.autoDrag;
+                        if (!drag || event.pointerId !== drag.id) return;
+                        if (
+                            !drag.started &&
+                            Math.hypot(event.clientX - drag.x, event.clientY - drag.y) < 5
+                        )
+                            return;
+                        drag.started = true;
+                        drag.row.style.opacity = '.55';
+                        var element = document.elementFromPoint(event.clientX, event.clientY);
+                        var hit = element && element.closest('[data-auto-zone]');
+                        self.autoNode.querySelectorAll('[data-auto-zone]').forEach(function (zone) {
+                            zone.style.outline = '';
+                        });
+                        if (hit && self.autoNode.contains(hit)) {
+                            drag.hit = hit;
+                            hit.style.outline = '2px dashed var(--primary-color-medium, #287cbb)';
+                        } else {
+                            drag.hit = null;
+                        }
+                    },
+                    pointerup: function (event) {
+                        var drag = self.autoDrag;
+                        if (!drag || drag.id !== event.pointerId) return;
+                        self.autoDrag = null;
+                        if (drag.row) drag.row.style.opacity = '';
+                        var element = document.elementFromPoint(event.clientX, event.clientY);
+                        var list = element && element.closest('[data-auto-zone]');
+                        if (list && self.autoNode.contains(list) && drag.started) {
+                            var targetRow = element.closest('[data-auto-name]');
+                            var target = targetRow && targetRow.getAttribute('data-auto-name');
+                            var after = false;
+                            if (targetRow) {
+                                var rect = targetRow.getBoundingClientRect();
+                                after = event.clientY >= rect.top + rect.height / 2;
+                            }
+                            self.moveAuto(name, list.getAttribute('data-auto-zone'), target, after);
+                        } else self.renderAuto();
+                    },
+                    pointercancel: function () {
+                        self.autoDrag = null;
+                        self.renderAuto();
+                    },
+                },
+                ['\u283f'],
+            );
+            return E(
+                'div',
+                {
+                    'data-auto-name': name,
+                    style:
+                        'display:flex;align-items:center;gap:.7em;margin:.4em 0;' +
+                        'padding:.6em;border:1px solid var(--border-color-medium, #ccc);' +
+                        'border-radius:6px;',
+                },
+                [
+                    handle,
+                    E('span', { style: 'min-width:1.7em;' }, [enabled ? String(index + 1) : '-']),
+                    E('strong', { style: 'flex:1;' }, [name]),
+                    E('small', {}, [reachable[name] ? _('Reachable') : _('Unreachable')]),
+                ],
+            );
+        }
+        function zone(title, list, enabled) {
+            return E('div', { style: 'margin-top:1em;' }, [
+                E('strong', {}, [title]),
+                E(
+                    'div',
+                    {
+                        'data-auto-zone': enabled ? 'enabled' : 'disabled',
+                        style:
+                            'min-height:3em;border:1px dashed var(--border-color-medium, #ccc);' +
+                            'padding:.4em;border-radius:6px;margin-top:.5em;',
+                    },
+                    list.map(function (name, index) {
+                        return row(name, index, enabled);
+                    }),
+                ),
+            ]);
+        }
+        var unused = data.names.filter(function (name) {
+            return self.autoDraft.indexOf(name) < 0;
+        });
+        var controls = E(
+            'div',
+            {
+                style:
+                    'display:flex;flex-wrap:wrap;justify-content:space-between;' +
+                    'gap:.5em;margin-top:1em;',
+            },
+            [
+                E(
+                    'button',
+                    {
+                        type: 'button',
+                        class: 'btn',
+                        disabled: this.busy,
+                        click: function () {
+                            return self.resetAuto();
+                        },
+                    },
+                    [_('Restore deployment priorities')],
+                ),
+                E('span', { style: 'display:flex;gap:.5em;flex-wrap:wrap;' }, [
+                    E(
+                        'button',
+                        {
+                            type: 'button',
+                            class: 'btn',
+                            disabled: equal || this.busy,
+                            click: function () {
+                                self.autoDraft = data.saved.slice();
+                                self.autoEditing = false;
+                                self.renderAuto();
+                            },
+                        },
+                        [_('Cancel')],
+                    ),
+                    E(
+                        'button',
+                        {
+                            type: 'button',
+                            class: 'btn btn-primary',
+                            disabled: equal || this.busy,
+                            click: function () {
+                                return self.saveAuto();
+                            },
+                        },
+                        [_('Save and apply')],
+                    ),
+                ]),
+            ],
+        );
+        dom.content(this.autoNode, [
+            zone(_('In AUTO (top priority first)'), this.autoDraft, true),
+            zone(_('Not in AUTO (manual selection remains available)'), unused, false),
+            controls,
+            E('small', {}, [equal ? _('Priorities are saved.') : _('Unsaved AUTO changes.')]),
+        ]);
+    },
+
+    saveAuto: function () {
+        var self = this;
+        var order = this.autoDraft.slice();
+        if (!order.length) return Promise.resolve();
+        return this.change(['auto-set'].concat(order)).then(function (ok) {
+            if (ok) self.autoEditing = false;
+            self.renderAuto();
+        });
+    },
+
+    resetAuto: function () {
+        var self = this;
+        return this.change(['auto-reset']).then(function (ok) {
+            if (ok) self.autoEditing = false;
+            self.renderAuto();
+        });
     },
 
     renderDevices: function () {
@@ -427,26 +709,34 @@ return view.extend({
             .then(function (result) {
                 self.state = parseStatus(result[0]);
                 self.devices = parseDevices(result[1]);
+                self.refreshError = false;
                 self.updateAll();
             })
             .catch(function (err) {
-                ui.addNotification(null, E('p', {}, [err.message]), 'danger');
+                // Polling happens every five seconds; avoid unbounded notifications.
+                if (!self.refreshError)
+                    ui.addNotification(null, E('p', {}, [err.message]), 'danger');
+                self.refreshError = true;
             });
     },
 
     change: function (args) {
         var self = this;
-        if (this.busy) return Promise.resolve();
+        if (this.busy) return Promise.resolve(false);
         this.busy = true;
         return run(args)
             .then(function () {
                 self.busy = false;
-                return self.refresh();
+                return self.refresh().then(function () {
+                    return true;
+                });
             })
             .catch(function (err) {
                 self.busy = false;
                 ui.addNotification(null, E('p', {}, [err.message]), 'danger');
-                return self.refresh();
+                return self.refresh().then(function () {
+                    return false;
+                });
             });
     },
 
@@ -478,8 +768,8 @@ return view.extend({
         }
         var parts = (this.newRouteValue || 'wan').split(':');
         var self = this;
-        return this.change(['device-set', ip, parts[0], parts[1] || '-']).then(function () {
-            self.ipInput.value = '';
+        return this.change(['device-set', ip, parts[0], parts[1] || '-']).then(function (ok) {
+            if (ok) self.ipInput.value = '';
         });
     },
 
