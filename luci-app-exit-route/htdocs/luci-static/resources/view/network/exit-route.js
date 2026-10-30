@@ -277,7 +277,7 @@ return view.extend({
             {
                 class: 'cbi-input-select',
                 style: 'max-width: 16em;',
-                disabled: self.busy,
+                disabled: self.busy ? '' : null,
                 change: function (ev) {
                     if (ev.target.value) return self.setGlobal(ev.target.value);
                 },
@@ -296,7 +296,7 @@ return view.extend({
                     {
                         type: 'button',
                         class: 'btn' + (mode === 'AUTO' ? ' btn-primary' : ''),
-                        disabled: self.busy,
+                        disabled: self.busy ? '' : null,
                         click: function () {
                             return self.setGlobal('AUTO');
                         },
@@ -308,7 +308,7 @@ return view.extend({
                     {
                         type: 'button',
                         class: 'btn' + (mode === 'WAN' ? ' btn-primary' : ''),
-                        disabled: self.busy,
+                        disabled: self.busy ? '' : null,
                         click: function () {
                             return self.setGlobal('WAN');
                         },
@@ -571,7 +571,7 @@ return view.extend({
                     {
                         type: 'button',
                         class: 'btn',
-                        disabled: this.busy,
+                        disabled: this.busy ? '' : null,
                         click: function () {
                             return self.resetAuto();
                         },
@@ -584,7 +584,7 @@ return view.extend({
                         {
                             type: 'button',
                             class: 'btn',
-                            disabled: equal || this.busy,
+                            disabled: equal || this.busy ? '' : null,
                             click: function () {
                                 self.autoDraft = data.saved.slice();
                                 self.autoEditing = false;
@@ -598,7 +598,7 @@ return view.extend({
                         {
                             type: 'button',
                             class: 'btn btn-primary',
-                            disabled: equal || this.busy,
+                            disabled: equal || this.busy ? '' : null,
                             click: function () {
                                 return self.saveAuto();
                             },
@@ -657,7 +657,7 @@ return view.extend({
                       {
                           type: 'button',
                           class: 'btn',
-                          disabled: self.busy,
+                          disabled: self.busy ? '' : null,
                           title: _('Restore deployment rule'),
                           click: function () {
                               return self.removeOverride(device);
